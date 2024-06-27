@@ -10,6 +10,10 @@ import { CustomerOnboardingService } from './onboarding.service';
 })
 export class CustomerOnboardingComponent {
   onboardingForm: FormGroup;
+  selectedFile: File | null = null;
+  maxFileSize = 10 * 1024 * 1024; // 10 MB
+  allowedFileTypes = ['image/jpeg', 'image/png', 'application/pdf', 'application/msword'];
+
 
   constructor(
     private fb: FormBuilder,
@@ -43,8 +47,14 @@ export class CustomerOnboardingComponent {
   }
 
   onSubmit() {
-    if (this.onboardingForm.valid) {
-      this.onboardingService.submitForm(this.onboardingForm.value).subscribe(
+    if (this.onboardingForm.valid && this.selectedFile) {
+      const formData = new FormData();
+      Object.keys(this.onboardingForm.controls).forEach(key => {
+        formData.append(key, this.onboardingForm.get(key)?.value);
+      });
+      formData.append('file', this.selectedFile);
+
+      this.onboardingService.submitForm(formData).subscribe(
         response => {
           console.log('Form submitted successfully', response);
           // Handle success response
@@ -58,4 +68,18 @@ export class CustomerOnboardingComponent {
       console.error('Form is invalid');
     }
   }
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file && file.size <= this.maxFileSize && this.allowedFileTypes.includes(file.type)) {
+      this.selectedFile = file;
+      this.onboardingForm.patchValue({ file });
+      this.onboardingForm.get('file')?.updateValueAndValidity();
+    } else {
+      this.selectedFile = null;
+      this.onboardingForm.patchValue({ file: null });
+      this.onboardingForm.get('file')?.setErrors({ invalidFile: true });
+    }
+  }
+
 }

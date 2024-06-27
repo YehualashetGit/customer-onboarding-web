@@ -10,7 +10,7 @@ import { OnboardingRoutingModule } from './onboarding-routing.module';
     CommonModule,
     OnboardingRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [CustomerOnboardingComponent],
   providers: [],

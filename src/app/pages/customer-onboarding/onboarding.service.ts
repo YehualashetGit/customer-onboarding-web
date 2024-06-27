@@ -11,7 +11,7 @@ export class CustomerOnboardingService {
 
   constructor(private http: HttpClient) { }
 
-  submitForm(data: any): Observable<any> {
+  submitForm(data: FormData): Observable<any> {
     return this.http.post<any>(this.apiUrl, data);
   }
 }

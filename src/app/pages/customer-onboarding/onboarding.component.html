@@ -85,6 +85,14 @@
               <input type="email" id="email" class="form-control" formControlName="email">
             </div>
 
+            <div class="form-group">
+              <label for="file">Upload Document (max 10 MB)</label>
+              <input type="file" id="file" class="form-control" (change)="onFileChange($event)" required>
+              <div *ngIf="onboardingForm.get('file')?.errors?.['invalidFile']" class="text-danger">
+                Invalid file. Only images and documents up to 10 MB are allowed.
+              </div>
+            </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
