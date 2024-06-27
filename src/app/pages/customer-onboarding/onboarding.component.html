@@ -1,0 +1,94 @@
+<div class="container-fluid mb-5">
+  <div class="row mb-5">
+    <div class="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
+      <div class="card-nga">
+        <h1 class="h5 card-header text-center py-4">
+          Customer Onboarding
+        </h1>
+        <div class="card-body px-lg-5 pt-4">
+          <form [formGroup]="onboardingForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="purpose">Main purpose for applying at MCB</label>
+              <select id="purpose" class="form-control" formControlName="purpose">
+                <option value="">Select purpose</option>
+                <option value="Investment portfolio">Investment portfolio</option>
+                <option value="Account to operate locally">Account to operate locally</option>
+                <option value="Account to operate overseas">Account to operate overseas</option>
+                <option value="Energy & commodities financing">Energy & commodities financing</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="companyName">Name of company</label>
+              <input type="text" id="companyName" class="form-control" formControlName="companyName">
+            </div>
+
+            <div class="form-group">
+              <label for="entityType">Type of entity</label>
+              <input type="text" id="entityType" class="form-control" formControlName="entityType">
+            </div>
+
+            <div class="form-group">
+              <label for="businessActivity">Business activity</label>
+              <select id="businessActivity" class="form-control" formControlName="businessActivity"
+                (change)="onBusinessActivityChange()">
+                <option value="">Select activity</option>
+                <option value="Banking">Banking</option>
+                <option value="Fishing">Fishing</option>
+                <option value="Manufacturing">Manufacturing</option>
+              </select>
+            </div>
+
+            <div class="form-group" *ngIf="onboardingForm.get('businessActivity')?.value === 'Banking'">
+              <label for="licenseRequirements">License requirements</label>
+              <input type="text" id="licenseRequirements" class="form-control" formControlName="licenseRequirements">
+            </div>
+
+            <div class="form-group">
+              <label for="countryOfIncorporation">Country of incorporation</label>
+              <select id="countryOfIncorporation" class="form-control" formControlName="countryOfIncorporation">
+                <option value="">Select country</option>
+                <option value="USA">USA</option>
+                <option value="UK">UK</option>
+                <option value="India">India</option>
+                <!-- Add other countries as needed -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="registrationNumber">Registration number</label>
+              <input type="text" id="registrationNumber" class="form-control" formControlName="registrationNumber">
+            </div>
+
+            <div class="form-group">
+              <label for="dateOfIncorporation">Date of incorporation</label>
+              <input type="date" id="dateOfIncorporation" class="form-control" formControlName="dateOfIncorporation">
+            </div>
+
+            <div class="form-group">
+              <label for="directorShareholders">Name of Director/ Shareholders</label>
+              <input type="text" id="directorShareholders" class="form-control" formControlName="directorShareholders">
+            </div>
+
+            <div class="form-group">
+              <label for="passportNumber">Passport number of directors</label>
+              <input type="text" id="passportNumber" class="form-control" formControlName="passportNumber">
+            </div>
+
+            <div class="form-group">
+              <label for="designatedApplicant">Name of designated applicant</label>
+              <input type="text" id="designatedApplicant" class="form-control" formControlName="designatedApplicant">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email address for further communication</label>
+              <input type="email" id="email" class="form-control" formControlName="email">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
