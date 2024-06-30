@@ -13,11 +13,15 @@ export class CustomerOnboardingComponent {
   selectedFile: File | null = null;
   maxFileSize = 10 * 1024 * 1024; // 10 MB
   allowedFileTypes = ['image/jpeg', 'image/png', 'application/pdf', 'application/msword'];
+  emailInvalid = false;
+
+
 
 
   constructor(
     private fb: FormBuilder,
     private onboardingService: CustomerOnboardingService
+
 
   ) {
     this.onboardingForm = this.fb.group({
@@ -44,6 +48,11 @@ export class CustomerOnboardingComponent {
       this.onboardingForm.get('licenseRequirements')?.clearValidators();
     }
     this.onboardingForm.get('licenseRequirements')?.updateValueAndValidity();
+  }
+
+  validateEmail(): void {
+    const emailControl = this.onboardingForm.get('email');
+    this.emailInvalid = Boolean(emailControl?.invalid && (emailControl.dirty || emailControl.touched));
   }
 
   onSubmit() {

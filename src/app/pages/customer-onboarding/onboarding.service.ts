@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CustomerOnboardingService {
 
-  private apiUrl = 'https://your-api-url.com/api/onboarding';  // Replace with your API URL
+  private apiUrl = 'http://localhost:8080/api/registrations/submit'
 
   constructor(private http: HttpClient) { }
 
